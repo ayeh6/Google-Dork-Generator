@@ -1,5 +1,10 @@
 const inputContainerEl = document.getElementById("input-container");
 const addRowButtonEl = document.getElementById("add-row-button");
+let removeBtnsEl = document.querySelectorAll(".remove-btn");
+
+const initialize = () => {
+   findAllRemoveBtns();
+}
 
 const getNewInputRowEl = () => {
    // create input row div
@@ -28,7 +33,8 @@ const getNewInputRowEl = () => {
       <option value="cache">cache</option>
    </select>
    <input class="form-control text-black col me-1" type="text" value="">
-   <button type="button" class="btn btn-danger px-auto col-1">-</button>`;
+   <button type="button" class="btn btn-danger px-auto col-1 remove-btn">-</button>`;
+
    return inputRowEl;
 }
 
@@ -42,16 +48,38 @@ const getNewAndOrSelectorEl = () => {
       <option value="&">& (AND)</option>
       <option value="|">| (OR)</option>
    </select>`;
+
    return inputAndOrSelectorEl;
+}
+
+const findAllRemoveBtns = () => {
+   console.log("finding all buttons");
+   removeBtnsEl = document.querySelectorAll(".remove-btn");
+   removeBtnsEl.forEach(button => {
+      button.addEventListener('click',removeRow);
+   });
 }
 
 const addRow = () => {
    let lastChild = inputContainerEl.lastElementChild;
-   console.log(lastChild);
+
    const newInputRowEl = getNewInputRowEl();
    const newInputAndOrSelectorEl = getNewAndOrSelectorEl();
+
    inputContainerEl.insertBefore(newInputAndOrSelectorEl, lastChild);
    inputContainerEl.insertBefore(newInputRowEl, lastChild);
+   findAllRemoveBtns();
+}
+
+const removeRow = (elem) => {
+   console.log(elem);
+   const row = elem.target.parentNode;
+   const andOrOperator = row.previousElementSibling;
+
+   row.remove();
+   andOrOperator.remove();
 }
 
 addRowButtonEl.addEventListener('click', addRow);
+
+initialize();
