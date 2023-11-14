@@ -1,10 +1,9 @@
 const inputContainerEl = document.getElementById("input-container");
 const addRowButtonEl = document.getElementById("add-row-button");
-let removeBtnsEl = document.querySelectorAll(".remove-btn");
 
-const initialize = () => {
-   findAllRemoveBtns();
-}
+let allRemoveBtnEl = document.querySelectorAll(".remove-btn");
+let allTextInputEl = document.querySelectorAll(".dork-input");
+let allSelectInputEl = document.querySelectorAll("select");
 
 const getNewInputRowEl = () => {
    // create input row div
@@ -32,7 +31,7 @@ const getNewInputRowEl = () => {
       <option value="related">related</option>
       <option value="cache">cache</option>
    </select>
-   <input class="form-control text-black col me-1" type="text" value="">
+   <input class="dork-input form-control text-black col me-1" type="text" value="">
    <button type="button" class="btn btn-danger px-auto col-1 remove-btn">-</button>`;
 
    return inputRowEl;
@@ -52,12 +51,30 @@ const getNewAndOrSelectorEl = () => {
    return inputAndOrSelectorEl;
 }
 
-const findAllRemoveBtns = () => {
+const updateOutput = () => {
+   console.log("UPDATE QUERY HERE");
+}
+
+const findAllRemoveBtnEl = () => {
    console.log("finding all buttons");
-   removeBtnsEl = document.querySelectorAll(".remove-btn");
-   removeBtnsEl.forEach(button => {
+   allRemoveBtnEl = document.querySelectorAll(".remove-btn");
+   allRemoveBtnEl.forEach(button => {
       button.addEventListener('click',removeRow);
    });
+}
+
+const findAllInputEl = () => {
+   allTextInputEl = document.querySelectorAll(".dork-input");
+   allTextInputEl.forEach(input => {
+      input.addEventListener('keypress',updateOutput);
+   });
+}
+
+const findAllSelectEl = () => {
+   allSelectInputEl = document.querySelectorAll("select");
+   allSelectInputEl.forEach(select => {
+      select.addEventListener('change',updateOutput);
+   })
 }
 
 const addRow = () => {
@@ -68,16 +85,25 @@ const addRow = () => {
 
    inputContainerEl.insertBefore(newInputAndOrSelectorEl, lastChild);
    inputContainerEl.insertBefore(newInputRowEl, lastChild);
-   findAllRemoveBtns();
+   findAllRemoveBtnEl();
+   findAllInputEl();
+   findAllSelectEl();
 }
 
 const removeRow = (elem) => {
-   console.log(elem);
    const row = elem.target.parentNode;
-   const andOrOperator = row.previousElementSibling;
+   const andOrOperatorEl = row.previousElementSibling;
 
    row.remove();
-   andOrOperator.remove();
+   andOrOperatorEl.remove();
+
+   updateOutput();
+}
+
+const initialize = () => {
+   findAllRemoveBtnEl();
+   findAllInputEl();
+   findAllSelectEl();
 }
 
 addRowButtonEl.addEventListener('click', addRow);
