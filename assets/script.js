@@ -1,3 +1,4 @@
+const queryOutputTextEl = document.getElementById("query-output-text");
 const inputContainerEl = document.getElementById("input-container");
 const addRowButtonEl = document.getElementById("add-row-button");
 
@@ -8,7 +9,7 @@ let allSelectInputEl = document.querySelectorAll("select");
 const getNewInputRowEl = () => {
    // create input row div
    const inputRowEl = document.createElement("div");
-   inputRowEl.setAttribute("class", "row mb-2 mx-5");
+   inputRowEl.setAttribute("class", "node row mb-2 mx-5");
    inputRowEl.innerHTML = `
    <select class="form-select col me-1">
       <option value="" selected></option>
@@ -39,10 +40,10 @@ const getNewInputRowEl = () => {
 
 const getNewAndOrSelectorEl = () => {
    // create input AND OR selector
-   const inputAndOrSelectorEl = document.createElement('div');
+   const inputAndOrSelectorEl = document.createElement("div");
    inputAndOrSelectorEl.setAttribute("class", "row mx-5 mb-2");
    inputAndOrSelectorEl.innerHTML = `
-   <select class="form-select text-center">
+   <select class="node operator form-select text-center">
       <option selected></option>
       <option value="&">& (AND)</option>
       <option value="|">| (OR)</option>
@@ -51,30 +52,47 @@ const getNewAndOrSelectorEl = () => {
    return inputAndOrSelectorEl;
 }
 
-const updateOutput = () => {
-   console.log("UPDATE QUERY HERE");
-}
-
 const findAllRemoveBtnEl = () => {
    console.log("finding all buttons");
    allRemoveBtnEl = document.querySelectorAll(".remove-btn");
    allRemoveBtnEl.forEach(button => {
-      button.addEventListener('click',removeRow);
+      button.addEventListener("click", removeRow);
    });
 }
 
 const findAllInputEl = () => {
    allTextInputEl = document.querySelectorAll(".dork-input");
    allTextInputEl.forEach(input => {
-      input.addEventListener('keypress',updateOutput);
+      input.addEventListener("keyup", updateOutput);
    });
 }
 
 const findAllSelectEl = () => {
    allSelectInputEl = document.querySelectorAll("select");
    allSelectInputEl.forEach(select => {
-      select.addEventListener('change',updateOutput);
+      select.addEventListener("change", updateOutput);
    })
+}
+
+const updateOutput = () => {
+   let output = "";
+   let nodes = document.querySelectorAll(".node");
+   for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      let nodeOutput = "";
+      if (node.classList.contains("row")) {
+         console.log(node.children[0].value);
+         let excIncOp = node.children[0].value;
+         let filter = (node.children[1].value == "") ? "" : node.children[1].value + ":";
+         let text = node.children[2].value;
+         nodeOutput = excIncOp + filter + text;
+      }
+      if (node.classList.contains("operator")) {
+         nodeOutput = node.value + " ";
+      }
+      output += (output == "" || i == nodes.length-1) ? nodeOutput : " " + nodeOutput;
+   }
+   queryOutputTextEl.value = output;
 }
 
 const addRow = () => {
@@ -100,12 +118,17 @@ const removeRow = (elem) => {
    updateOutput();
 }
 
+const copyOutput = () => {
+   navigator.clipboard.writeText(queryOutputTextEl.value);
+}
+
 const initialize = () => {
    findAllRemoveBtnEl();
    findAllInputEl();
    findAllSelectEl();
 }
 
-addRowButtonEl.addEventListener('click', addRow);
+addRowButtonEl.addEventListener("click", addRow);
+queryOutputTextEl.addEventListener("click", copyOutput);
 
 initialize();

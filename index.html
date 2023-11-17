@@ -24,7 +24,7 @@
          </div>
          <div class="row mt-1 px-3">
             <input id="query-output-text" type="text" class="form-control fs-2 text-center text-black"
-               value="test query output" readonly="readonly">
+               value="" readonly="readonly">
          </div>
       </div>
       <div id="input-container" class="container mt-5 mx-auto">
@@ -32,8 +32,7 @@
             <h3>Input Parameters</h3>
          </div>
 
-         <!-- input row -->
-         <div class="row mb-2 mx-5">
+         <div class="node row mb-2 mx-5">
             <select class="form-select col me-1">
                <option value="" selected></option>
                <option value="+">+ (include)</option>
@@ -56,10 +55,8 @@
                <option value="cache">cache</option>
             </select>
             <input class="dork-input form-control text-black col me-1" type="text" value="">
-            <!-- <button type="button" class="btn btn-danger px-auto col-1 remove-btn">-</button> -->
          </div>
 
-         <!-- add new row button -->
          <div class="row mx-5">
             <button type="button" class="btn btn-success" id="add-row-button">+</button>
          </div>
