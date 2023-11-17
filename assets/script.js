@@ -6,8 +6,8 @@ let allRemoveBtnEl = document.querySelectorAll(".remove-btn");
 let allTextInputEl = document.querySelectorAll(".dork-input");
 let allSelectInputEl = document.querySelectorAll("select");
 
+// create input row div
 const getNewInputRowEl = () => {
-   // create input row div
    const inputRowEl = document.createElement("div");
    inputRowEl.setAttribute("class", "node row mb-2 mx-5");
    inputRowEl.innerHTML = `
@@ -38,8 +38,8 @@ const getNewInputRowEl = () => {
    return inputRowEl;
 }
 
+// create input AND OR selector
 const getNewAndOrSelectorEl = () => {
-   // create input AND OR selector
    const inputAndOrSelectorEl = document.createElement("div");
    inputAndOrSelectorEl.setAttribute("class", "row mx-5 mb-2");
    inputAndOrSelectorEl.innerHTML = `
@@ -85,14 +85,14 @@ const updateOutput = () => {
          let excIncOp = node.children[0].value;
          let filter = (node.children[1].value == "") ? "" : node.children[1].value + ":";
          let text = node.children[2].value;
-         nodeOutput = excIncOp + filter + text;
+         nodeOutput = excIncOp + filter + text + " ";
       }
       if (node.classList.contains("operator")) {
-         nodeOutput = node.value + " ";
+         nodeOutput = (node.value != "") ? node.value + " " : "";
       }
-      output += (output == "" || i == nodes.length-1) ? nodeOutput : " " + nodeOutput;
+      output += nodeOutput;
    }
-   queryOutputTextEl.value = output;
+   queryOutputTextEl.value = output.substring(0, output.length-1);
 }
 
 const addRow = () => {
@@ -111,10 +111,8 @@ const addRow = () => {
 const removeRow = (elem) => {
    const row = elem.target.parentNode;
    const andOrOperatorEl = row.previousElementSibling;
-
    row.remove();
    andOrOperatorEl.remove();
-
    updateOutput();
 }
 
