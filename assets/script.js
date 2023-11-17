@@ -9,30 +9,39 @@ let allSelectInputEl = document.querySelectorAll("select");
 // create input row div
 const getNewInputRowEl = () => {
    const inputRowEl = document.createElement("div");
-   inputRowEl.setAttribute("class", "node row mb-2 mx-5");
+   inputRowEl.setAttribute("class", "node row mb-4 mx-5");
    inputRowEl.innerHTML = `
-   <select class="form-select col me-1">
-      <option value="" selected></option>
-      <option value="+">+ (include)</option>
-      <option value="-">- (exclude)</option>
-   </select>
-   <select class="form-select col me-1" aria-label="Filter select">
-      <option selected></option>
-      <option value="allintext">allintext</option>
-      <option value="intext">intext</option>
-      <option value="allinurl">allinurl</option>
-      <option value="inurl">inurl</option>
-      <option value="allintitle">allintitle</option>
-      <option value="intitle">intitle</option>
-      <option value="allinanchor">allinanchor</option>
-      <option value="inanchor">inanchor</option>
-      <option value="site">site</option>
-      <option value="filetype">filetype</option>
-      <option value="link">link</option>
-      <option value="related">related</option>
-      <option value="cache">cache</option>
-   </select>
-   <input class="dork-input form-control text-black col me-1" type="text" value="">
+   <div class="form-floating col me-1 gx-1">
+      <select class="form-select">
+         <option value="" selected></option>
+         <option value="+">+ (include)</option>
+         <option value="-">- (exclude)</option>
+      </select>
+      <label>Include/Exclude</label>
+   </div>
+   <div class="form-floating col me-1 gx-1">
+      <select class="form-select">
+         <option selected></option>
+         <option value="allintext">allintext</option>
+         <option value="intext">intext</option>
+         <option value="allinurl">allinurl</option>
+         <option value="inurl">inurl</option>
+         <option value="allintitle">allintitle</option>
+         <option value="intitle">intitle</option>
+         <option value="allinanchor">allinanchor</option>
+         <option value="inanchor">inanchor</option>
+         <option value="site">site</option>
+         <option value="filetype">filetype</option>
+         <option value="link">link</option>
+         <option value="related">related</option>
+         <option value="cache">cache</option>
+      </select>
+      <label>Filter</label>
+   </div>
+   <div class="form-floating col me-1 gx-1">
+      <input class="dork-input form-control text-black" type="text" value="">
+      <label>Text</label>
+   </div>
    <button type="button" class="btn btn-danger px-auto col-1 remove-btn">-</button>`;
 
    return inputRowEl;
@@ -41,13 +50,14 @@ const getNewInputRowEl = () => {
 // create input AND OR selector
 const getNewAndOrSelectorEl = () => {
    const inputAndOrSelectorEl = document.createElement("div");
-   inputAndOrSelectorEl.setAttribute("class", "row mx-5 mb-2");
+   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-5 mb-4 gx-1");
    inputAndOrSelectorEl.innerHTML = `
    <select class="node operator form-select text-center">
       <option selected></option>
       <option value="&">& (AND)</option>
       <option value="|">| (OR)</option>
-   </select>`;
+   </select>
+   <label>Operator</label>`;
 
    return inputAndOrSelectorEl;
 }
@@ -81,10 +91,10 @@ const updateOutput = () => {
       let node = nodes[i];
       let nodeOutput = "";
       if (node.classList.contains("row")) {
-         console.log(node.children[0].value);
-         let excIncOp = node.children[0].value;
-         let filter = (node.children[1].value == "") ? "" : node.children[1].value + ":";
-         let text = node.children[2].value;
+         console.log(node.children[1].children);
+         let excIncOp = node.children[0].children[0].value;
+         let filter = (node.children[1].children[0].value == "") ? "" : node.children[1].children[0].value + ":";
+         let text = node.children[2].children[0].value;
          nodeOutput = excIncOp + filter + text + " ";
       }
       if (node.classList.contains("operator")) {
@@ -92,7 +102,7 @@ const updateOutput = () => {
       }
       output += nodeOutput;
    }
-   queryOutputTextEl.value = output.substring(0, output.length-1);
+   queryOutputTextEl.value = output.substring(0, output.length - 1);
 }
 
 const addRow = () => {
