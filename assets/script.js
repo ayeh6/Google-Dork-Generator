@@ -1,4 +1,5 @@
 const queryOutputTextEl = document.getElementById("query-output-text");
+const googleSearchBtn = document.getElementById("google-search-button");
 const inputContainerEl = document.getElementById("input-container");
 const addRowButtonEl = document.getElementById("add-row-button");
 
@@ -63,7 +64,6 @@ const getNewAndOrSelectorEl = () => {
 }
 
 const findAllRemoveBtnEl = () => {
-   console.log("finding all buttons");
    allRemoveBtnEl = document.querySelectorAll(".remove-btn");
    allRemoveBtnEl.forEach(button => {
       button.addEventListener("click", removeRow);
@@ -91,7 +91,6 @@ const updateOutput = () => {
       let node = nodes[i];
       let nodeOutput = "";
       if (node.classList.contains("row")) {
-         console.log(node.children[1].children);
          let excIncOp = node.children[0].children[0].value;
          let filter = (node.children[1].children[0].value == "") ? "" : node.children[1].children[0].value + ":";
          let text = node.children[2].children[0].value;
@@ -102,7 +101,10 @@ const updateOutput = () => {
       }
       output += nodeOutput;
    }
-   queryOutputTextEl.value = output.substring(0, output.length - 1);
+   output = output.substring(0, output.length - 1);
+   queryOutputTextEl.value = output;
+   let outputURIEncoded = encodeURIComponent(output);
+   googleSearchBtn.setAttribute("href","https://www.google.com/search?q=" + outputURIEncoded);
 }
 
 const addRow = () => {
@@ -140,3 +142,12 @@ addRowButtonEl.addEventListener("click", addRow);
 queryOutputTextEl.addEventListener("click", copyOutput);
 
 initialize();
+
+/*
+
+' = %27
+\ = %5C
+/ = %2F
+
+
+*/

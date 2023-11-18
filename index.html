@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- <link rel="stylesheet" href="./assets/style.css"> -->
+   <link rel="stylesheet" href="./assets/style.css">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
    <title>Yeh Dorking</title>
@@ -19,19 +19,22 @@
          <div class="row text-center">
             <h1 class="mt-4">Google Dork Generator</h1>
          </div>
-         <div class="row mt-5">
+         <div class="row mt-4">
             <h3>Output Query</h3>
          </div>
-         <div class="row mt-1 px-3">
+         <div class="row mt-1 mb-4 px-3">
             <input id="query-output-text" type="text" class="form-control fs-2 text-center text-black"
                value="" readonly="readonly">
          </div>
+         <div class="row mx-5">
+            <a id="google-search-button" class="btn btn-success" href="https://www.google.com" target="_blank" rel="noreferrer">Search on Google</a>
+         </div>
       </div>
-      <div id="input-container" class="container mt-5 mx-auto">
+      <div id="input-container" class="container mt-3 mx-auto">
          <div class="row mb-2">
             <h3>Input Parameters</h3>
          </div>
-         <div class="node row mb-4 mx-5">
+         <div class="node row mb-4 mx-1">
             <div class="form-floating col me-1 gx-1">
                <select class="form-select">
                   <option value="" selected></option>
@@ -66,8 +69,86 @@
          </div>
 
          <div class="row mx-5">
-            <button type="button" class="btn btn-success" id="add-row-button">+</button>
+            <button type="button" class="btn btn-primary" id="add-row-button">+</button>
          </div>
+      </div>
+      <div class="container mt-5">
+         <h2>What is Google Dorking?</h2>
+         <p>Google dorking is a technique to search for sensitive information using advanced search operators. Using this tool you can generate queries and use those queries to find information with finer control.</p>
+         <table class="table table-light">
+            <thead>
+               <tr>
+                  <th scope="col">Filter</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Example</th>
+               </tr>
+            </thead>
+            <tbody>
+               <td>allintext</td>
+               <td>Searches for occurrences of all the keywords given.</td>
+               <td>allintext:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>intext</td>
+               <td>Searches for the occurrences of keywords all at once or one at a time.</td>
+               <td>intext:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>allinurl</td>
+               <td>Searches for a URL matching all the keywords in the query.</td>
+               <td>allinurl:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>inurl</td>
+               <td>Searches for a URL matching one of the keywords.</td>
+               <td>inurl:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>allintitle</td>
+               <td>Searches for occurrences of keywords all at a time</td>
+               <td>allintitle:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>intitle</td>
+               <td>Searches for occurrences of keywords in title all or one.</td>
+               <td>intitle:"keywords"</td>
+            </tbody>
+            <tbody>
+               <td>allinanchor</td>
+               <td>Shows sites which have keyterms in links pointing to them, in order of the most links. Using all keywords.</td>
+               <td>allinanchor:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>inanchor</td>
+               <td>Shows sites which have keyterms all at a time in links pointing to them, in order of the most links. Using one or all keywords.</td>
+               <td>inanchor:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>site</td>
+               <td>Specifically searches that particular site and lists all the results for that site.</td>
+               <td>site:"reddit.com"</td>
+            </tbody>
+            <tbody>
+               <td>filetype</td>
+               <td>Searches for a particular filetype.</td>
+               <td>filetype:"pdf"</td>
+            </tbody>
+            <tbody>
+               <td>link</td>
+               <td>Searches for external links to pages.</td>
+               <td>link:"keyword"</td>
+            </tbody>
+            <tbody>
+               <td>related</td>
+               <td>List web pages that are similar to a specific web page.</td>
+               <td>related:"nytimes.com"</td>
+            </tbody>
+            <tbody>
+               <td>cache</td>
+               <td>Shows the version of a web page that Google has in its cache.</td>
+               <td>cache:"linkedin.com"</td>
+            </tbody>
+         </table>
       </div>
    </div>
 
