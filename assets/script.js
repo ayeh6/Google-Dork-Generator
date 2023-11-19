@@ -7,60 +7,57 @@ let allRemoveBtnEl = document.querySelectorAll(".remove-btn");
 let allTextInputEl = document.querySelectorAll(".dork-input");
 let allSelectInputEl = document.querySelectorAll("select");
 
-// create input row div
-const getNewInputRowEl = () => {
-   const inputRowEl = document.createElement("div");
-   inputRowEl.setAttribute("class", "node node-filter row mb-4 mx-1");
-   inputRowEl.innerHTML = `
-   <button type="button" class="btn btn-danger px-auto col-1 me-1 remove-btn">-</button>
-   <div class="form-floating col me-1 gx-1">
-      <select class="form-select">
-         <option value="" selected></option>
-         <option value="+">+ (include)</option>
-         <option value="-">- (exclude)</option>
-      </select>
-      <label>Include/Exclude</label>
+const getNewInputRowsEl = () => {
+   const inputRowsEl = document.createElement("div");
+   inputRowsEl.setAttribute("class", "row mx-1 mb-4");
+   inputRowsEl.innerHTML = `
+   <div class="col me-3">
+      <div class="row mb-2">
+         <div class="form-floating gx-1">
+            <select class="node operator form-select text-center">
+               <option selected></option>
+               <option value="&">& (AND)</option>
+               <option value="|">| (OR)</option>
+            </select>
+            <label>Operator</label>
+         </div>
+      </div>
+      <div class="node filter row form-floating">
+         <div class="form-floating col me-1 gx-1">
+            <select class="form-select">
+               <option value="" selected></option>
+               <option value="+">+ (include)</option>
+               <option value="-">- (exclude)</option>
+            </select>
+            <label>Include/Exclude</label>
+         </div>
+         <div class="form-floating col me-1 gx-1">
+            <select class="form-select">
+               <option selected></option>
+               <option value="allintext">allintext</option>
+               <option value="intext">intext</option>
+               <option value="allinurl">allinurl</option>
+               <option value="inurl">inurl</option>
+               <option value="allintitle">allintitle</option>
+               <option value="intitle">intitle</option>
+               <option value="allinanchor">allinanchor</option>
+               <option value="inanchor">inanchor</option>
+               <option value="site">site</option>
+               <option value="filetype">filetype</option>
+               <option value="link">link</option>
+               <option value="related">related</option>
+               <option value="cache">cache</option>
+            </select>
+            <label>Filter</label>
+         </div>
+         <div class="form-floating col gx-1">
+            <input class="dork-input form-control text-black" type="text" value="">
+            <label>Text</label>
+         </div>
+      </div>
    </div>
-   <div class="form-floating col me-1 gx-1">
-      <select class="form-select">
-         <option selected></option>
-         <option value="allintext">allintext</option>
-         <option value="intext">intext</option>
-         <option value="allinurl">allinurl</option>
-         <option value="inurl">inurl</option>
-         <option value="allintitle">allintitle</option>
-         <option value="intitle">intitle</option>
-         <option value="allinanchor">allinanchor</option>
-         <option value="inanchor">inanchor</option>
-         <option value="site">site</option>
-         <option value="filetype">filetype</option>
-         <option value="link">link</option>
-         <option value="related">related</option>
-         <option value="cache">cache</option>
-      </select>
-      <label>Filter</label>
-   </div>
-   <div class="form-floating col gx-1">
-      <input class="dork-input form-control text-black" type="text" value="">
-      <label>Text</label>
-   </div>`;
-
-   return inputRowEl;
-}
-
-// create input AND OR selector
-const getNewAndOrSelectorEl = () => {
-   const inputAndOrSelectorEl = document.createElement("div");
-   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-1 mb-4 gx-1");
-   inputAndOrSelectorEl.innerHTML = `
-   <select class="node operator form-select text-center">
-      <option selected></option>
-      <option value="&">& (AND)</option>
-      <option value="|">| (OR)</option>
-   </select>
-   <label>Operator</label>`;
-
-   return inputAndOrSelectorEl;
+   <button type="button" class="btn btn-danger remove-btn col-1">-</button>`;
+   return inputRowsEl;
 }
 
 const findAllRemoveBtnEl = () => {
@@ -85,12 +82,14 @@ const findAllSelectEl = () => {
 }
 
 const updateOutput = () => {
+   console.log("updating!");
    let output = "";
    let nodes = document.querySelectorAll(".node");
+   console.log(nodes);
    for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
       let nodeOutput = "";
-      if (node.classList.contains("node-filter")) {
+      if (node.classList.contains("filter")) {
          let excIncOp = node.children[0].children[0].value;
          let filter = (node.children[1].children[0].value == "") ? "" : node.children[1].children[0].value + ":";
          let text = node.children[2].children[0].value;
@@ -107,24 +106,20 @@ const updateOutput = () => {
    googleSearchBtn.setAttribute("href","https://www.google.com/search?q=" + outputURIEncoded);
 }
 
-const addRow = () => {
+const addRows = () => {
    let lastChild = inputContainerEl.lastElementChild;
 
-   const newInputRowEl = getNewInputRowEl();
-   const newInputAndOrSelectorEl = getNewAndOrSelectorEl();
+   const inputRowsEl = getNewInputRowsEl();
+   inputContainerEl.insertBefore(inputRowsEl, lastChild);
 
-   inputContainerEl.insertBefore(newInputAndOrSelectorEl, lastChild);
-   inputContainerEl.insertBefore(newInputRowEl, lastChild);
    findAllRemoveBtnEl();
    findAllInputEl();
    findAllSelectEl();
 }
 
-const removeRow = (elem) => {
-   const row = elem.target.parentNode;
-   const andOrOperatorEl = row.previousElementSibling;
+const removeRow = (event) => {
+   const row = event.target.parentNode;
    row.remove();
-   andOrOperatorEl.remove();
    updateOutput();
 }
 
@@ -138,7 +133,7 @@ const initialize = () => {
    findAllSelectEl();
 }
 
-addRowButtonEl.addEventListener("click", addRow);
+addRowButtonEl.addEventListener("click", addRows);
 queryOutputTextEl.addEventListener("click", copyOutput);
 
 initialize();
