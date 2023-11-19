@@ -129,7 +129,7 @@ const removeRow = (elem) => {
 }
 
 const copyOutput = () => {
-   navigator.clipboard.writeText(queryOutputTextEl.value);
+   navigator.clipboard.writeText(queryOutputTextEl.textContent);
 }
 
 const initialize = () => {
