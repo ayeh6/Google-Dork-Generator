@@ -11,7 +11,7 @@ const getNewInputRowsEl = () => {
    const inputRowsEl = document.createElement("div");
    inputRowsEl.setAttribute("class", "row mx-1 mb-4");
    inputRowsEl.innerHTML = `
-   <div class="col me-3">
+   <div class="col me-1">
       <div class="row mb-2">
          <div class="form-floating gx-1">
             <select class="node operator form-select text-center">
@@ -29,7 +29,7 @@ const getNewInputRowsEl = () => {
                <option value="+">+ (include)</option>
                <option value="-">- (exclude)</option>
             </select>
-            <label>Include/Exclude</label>
+            <label>Inc/Exc</label>
          </div>
          <div class="form-floating col me-1 gx-1">
             <select class="form-select">
@@ -56,7 +56,7 @@ const getNewInputRowsEl = () => {
          </div>
       </div>
    </div>
-   <button type="button" class="btn btn-danger remove-btn col-1">-</button>`;
+   <button type="button" class="btn btn-danger remove-btn col-2 col-sm-1">-</button>`;
    return inputRowsEl;
 }
 
