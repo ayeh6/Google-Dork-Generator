@@ -10,8 +10,9 @@ let allSelectInputEl = document.querySelectorAll("select");
 // create input row div
 const getNewInputRowEl = () => {
    const inputRowEl = document.createElement("div");
-   inputRowEl.setAttribute("class", "node row mb-4 mx-4");
+   inputRowEl.setAttribute("class", "node node-filter row mb-4 mx-1");
    inputRowEl.innerHTML = `
+   <button type="button" class="btn btn-danger px-auto col-1 me-1 remove-btn">-</button>
    <div class="form-floating col me-1 gx-1">
       <select class="form-select">
          <option value="" selected></option>
@@ -39,11 +40,10 @@ const getNewInputRowEl = () => {
       </select>
       <label>Filter</label>
    </div>
-   <div class="form-floating col me-1 gx-1">
+   <div class="form-floating col gx-1">
       <input class="dork-input form-control text-black" type="text" value="">
       <label>Text</label>
-   </div>
-   <button type="button" class="btn btn-danger px-auto col-1 remove-btn">-</button>`;
+   </div>`;
 
    return inputRowEl;
 }
@@ -51,7 +51,7 @@ const getNewInputRowEl = () => {
 // create input AND OR selector
 const getNewAndOrSelectorEl = () => {
    const inputAndOrSelectorEl = document.createElement("div");
-   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-4 mb-4 gx-1");
+   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-1 mb-4 gx-1");
    inputAndOrSelectorEl.innerHTML = `
    <select class="node operator form-select text-center">
       <option selected></option>
@@ -81,7 +81,7 @@ const findAllSelectEl = () => {
    allSelectInputEl = document.querySelectorAll("select");
    allSelectInputEl.forEach(select => {
       select.addEventListener("change", updateOutput);
-   })
+   });
 }
 
 const updateOutput = () => {
@@ -90,7 +90,7 @@ const updateOutput = () => {
    for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
       let nodeOutput = "";
-      if (node.classList.contains("row")) {
+      if (node.classList.contains("node-filter")) {
          let excIncOp = node.children[0].children[0].value;
          let filter = (node.children[1].children[0].value == "") ? "" : node.children[1].children[0].value + ":";
          let text = node.children[2].children[0].value;
@@ -142,12 +142,3 @@ addRowButtonEl.addEventListener("click", addRow);
 queryOutputTextEl.addEventListener("click", copyOutput);
 
 initialize();
-
-/*
-
-' = %27
-\ = %5C
-/ = %2F
-
-
-*/
