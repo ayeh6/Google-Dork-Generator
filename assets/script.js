@@ -10,7 +10,7 @@ let allSelectInputEl = document.querySelectorAll("select");
 // create input row div
 const getNewInputRowEl = () => {
    const inputRowEl = document.createElement("div");
-   inputRowEl.setAttribute("class", "node row mb-4 mx-5");
+   inputRowEl.setAttribute("class", "node row mb-4 mx-4");
    inputRowEl.innerHTML = `
    <div class="form-floating col me-1 gx-1">
       <select class="form-select">
@@ -51,7 +51,7 @@ const getNewInputRowEl = () => {
 // create input AND OR selector
 const getNewAndOrSelectorEl = () => {
    const inputAndOrSelectorEl = document.createElement("div");
-   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-5 mb-4 gx-1");
+   inputAndOrSelectorEl.setAttribute("class", "row form-floating mx-4 mb-4 gx-1");
    inputAndOrSelectorEl.innerHTML = `
    <select class="node operator form-select text-center">
       <option selected></option>
@@ -102,7 +102,7 @@ const updateOutput = () => {
       output += nodeOutput;
    }
    output = output.substring(0, output.length - 1);
-   queryOutputTextEl.value = output;
+   queryOutputTextEl.textContent = output;
    let outputURIEncoded = encodeURIComponent(output);
    googleSearchBtn.setAttribute("href","https://www.google.com/search?q=" + outputURIEncoded);
 }
