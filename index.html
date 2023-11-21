@@ -15,9 +15,11 @@
 
 <body>
    <div class="container">
-      <div id="title-output-container" class="container mx-auto">
-         <div class="row text-center">
-            <h1 class="mt-4">Google Dork Generator</h1>
+      <div id="title-output-container" class="container mx-auto mt-5">
+         <div class="row text-center justify-content-center">
+            <div class="w-50">
+               <img src="/assets/images/yeh-dorking-logo.png" class="img-fluid">
+            </div>
          </div>
          <div class="row mt-4">
             <h3>Output Query</h3>
@@ -26,7 +28,8 @@
             <p id="query-output-text" class="text-center p-4 fs-2"></p>
          </div>
          <div class="row mx-1">
-            <a id="google-search-button" class="btn btn-success" href="https://www.google.com" target="_blank" rel="noreferrer" style="height:50px;"><h3>Search on Google</h3></a>
+            <a id="google-search-button" class="btn btn-success btn-lg" href="https://www.google.com" target="_blank"
+               rel="noreferrer" style="height:50px;">Search on Google</a>
          </div>
       </div>
       <div id="input-container" class="container mt-5 mx-auto">
@@ -67,86 +70,153 @@
             </div>
          </div>
          <div class="row mx-1 justify-content-end">
-            <button type="button" class="btn btn-primary" id="add-row-button" style="width:105.33px; height:50px;">add row</button>
+            <button type="button" class="btn btn-primary" id="add-row-button" style="width:105.33px; height:50px;">add
+               row</button>
          </div>
       </div>
       <div class="container mt-5 mx-auto">
          <h2>What is Google Dorking?</h2>
-         <p>Google dorking is a technique to search for sensitive information using advanced search operators. Using this tool you can generate queries and use those queries to find information with finer control.</p>
-         <table class="table table-light">
-            <thead>
-               <tr>
-                  <th scope="col">Filter</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Example</th>
-               </tr>
-            </thead>
-            <tbody>
-               <td>allintext</td>
-               <td>Searches for occurrences of all the keywords given.</td>
-               <td>allintext:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>intext</td>
-               <td>Searches for the occurrences of keywords all at once or one at a time.</td>
-               <td>intext:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>allinurl</td>
-               <td>Searches for a URL matching all the keywords in the query.</td>
-               <td>allinurl:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>inurl</td>
-               <td>Searches for a URL matching one of the keywords.</td>
-               <td>inurl:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>allintitle</td>
-               <td>Searches for occurrences of keywords all at a time</td>
-               <td>allintitle:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>intitle</td>
-               <td>Searches for occurrences of keywords in title all or one.</td>
-               <td>intitle:"keywords"</td>
-            </tbody>
-            <tbody>
-               <td>allinanchor</td>
-               <td>Shows sites which have keyterms in links pointing to them, in order of the most links. Using all keywords.</td>
-               <td>allinanchor:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>inanchor</td>
-               <td>Shows sites which have keyterms all at a time in links pointing to them, in order of the most links. Using one or all keywords.</td>
-               <td>inanchor:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>site</td>
-               <td>Specifically searches that particular site and lists all the results for that site.</td>
-               <td>site:"reddit.com"</td>
-            </tbody>
-            <tbody>
-               <td>filetype</td>
-               <td>Searches for a particular filetype.</td>
-               <td>filetype:"pdf"</td>
-            </tbody>
-            <tbody>
-               <td>link</td>
-               <td>Searches for external links to pages.</td>
-               <td>link:"keyword"</td>
-            </tbody>
-            <tbody>
-               <td>related</td>
-               <td>List web pages that are similar to a specific web page.</td>
-               <td>related:"nytimes.com"</td>
-            </tbody>
-            <tbody>
-               <td>cache</td>
-               <td>Shows the version of a web page that Google has in its cache.</td>
-               <td>cache:"linkedin.com"</td>
-            </tbody>
-         </table>
+         <p>Google dorking is a technique to search for sensitive information using advanced search operators. Using
+            this tool you can generate queries and use those queries to find information with finer control.</p>
+         <div class="mt-5">
+            <h3>Filters</h3>
+            <table class="table table-light">
+               <thead>
+                  <tr>
+                     <th scope="col">Filter</th>
+                     <th scope="col">Description</th>
+                     <th scope="col">Example</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <td>allintext</td>
+                  <td>Searches for occurrences of all the keywords given.</td>
+                  <td>allintext:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>intext</td>
+                  <td>Searches for the occurrences of keywords all at once or one at a time.</td>
+                  <td>intext:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>allinurl</td>
+                  <td>Searches for a URL matching all the keywords in the query.</td>
+                  <td>allinurl:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>inurl</td>
+                  <td>Searches for a URL matching one of the keywords.</td>
+                  <td>inurl:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>allintitle</td>
+                  <td>Searches for occurrences of keywords all at a time.</td>
+                  <td>allintitle:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>intitle</td>
+                  <td>Searches for occurrences of keywords in title all or one.</td>
+                  <td>intitle:"keywords"</td>
+               </tbody>
+               <tbody>
+                  <td>allinanchor</td>
+                  <td>Shows sites which have keyterms in links pointing to them, in order of the most links. Using all
+                     keywords.</td>
+                  <td>allinanchor:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>inanchor</td>
+                  <td>Shows sites which have keyterms all at a time in links pointing to them, in order of the most
+                     links. Using one or all keywords.</td>
+                  <td>inanchor:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>site</td>
+                  <td>Specifically searches that particular site and lists all the results for that site.</td>
+                  <td>site:"reddit.com"</td>
+               </tbody>
+               <tbody>
+                  <td>filetype</td>
+                  <td>Searches for a particular filetype.</td>
+                  <td>filetype:"pdf"</td>
+               </tbody>
+               <tbody>
+                  <td>link</td>
+                  <td>Searches for external links to pages.</td>
+                  <td>link:"keyword"</td>
+               </tbody>
+               <tbody>
+                  <td>related</td>
+                  <td>List web pages that are similar to a specific web page.</td>
+                  <td>related:"nytimes.com"</td>
+               </tbody>
+               <tbody>
+                  <td>cache</td>
+                  <td>Shows the version of a web page that Google has in its cache.</td>
+                  <td>cache:"linkedin.com"</td>
+               </tbody>
+            </table>
+         </div>
+         <div class="mt-5">
+            <h3>Operators</h3>
+            <table class="table table-light">
+               <thead>
+                  <tr>
+                     <th scope="col">Symbol</th>
+                     <th scope="col">Name</th>
+                     <th scope="col">Description</th>
+                     <th scope="col">Example</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <td>*</td>
+                  <td>Wildcard</td>
+                  <td>Used as a placeholder for any word or character.</td>
+                  <td>site:linkedin.com/in/*</td>
+               </tbody>
+               <tbody>
+                  <td>+</td>
+                  <td>Include</td>
+                  <td>Forces the inclusion of a search term.</td>
+                  <td>+intext:cats</td>
+               </tbody>
+               <tbody>
+                  <td>-</td>
+                  <td>Exclude</td>
+                  <td>Forces the exclusion of a search term.</td>
+                  <td>-site:indeed.com</td>
+               </tbody>
+               <tbody>
+                  <td>&</td>
+                  <td>AND</td>
+                  <td>Used in between terms, results must include both.</td>
+                  <td>site:linkedin.com & site:glassdoor.com</td>
+               </tbody>
+               <tbody>
+                  <td>|</td>
+                  <td>OR</td>
+                  <td>Used in between terms, results may or may not include both.</td>
+                  <td>site:nytimes.com | site:washingtonpost.com</td>
+               </tbody>
+               <tbody>
+                  <td>~</td>
+                  <td>Synonyms</td>
+                  <td>Used to find search results with that are similar to a term, like synonyms.</td>
+                  <td>~set</td>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="container mt-5 mb-3 d-flex flex-column align-items-center">
+         <h6 class="text-center">created by <a href="https://www.linkedin.com/in/ayeh6/" target="_blank"
+               style="text-decoration: none;">Andrew Yeh</a>
+         </h6>
+         <a href="https://www.github.com/ayeh6/Google-Dork-Generator" target="_blank"><svg
+               xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github"
+               viewBox="0 0 16 16">
+               <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg></a>
       </div>
    </div>
 

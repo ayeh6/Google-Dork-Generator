@@ -19,7 +19,7 @@ const getNewInputRowsEl = () => {
                <option value="&">& (AND)</option>
                <option value="|">| (OR)</option>
             </select>
-            <label>Operator</label>
+            <label>AND/OR</label>
          </div>
       </div>
       <div class="node filter row form-floating">
@@ -60,6 +60,23 @@ const getNewInputRowsEl = () => {
    return inputRowsEl;
 }
 
+const addRows = () => {
+   let lastChild = inputContainerEl.lastElementChild;
+
+   const inputRowsEl = getNewInputRowsEl();
+   inputContainerEl.insertBefore(inputRowsEl, lastChild);
+
+   findAllRemoveBtnEl();
+   findAllInputEl();
+   findAllSelectEl();
+}
+
+const removeRow = (event) => {
+   const row = event.target.parentNode;
+   row.remove();
+   updateOutput();
+}
+
 const findAllRemoveBtnEl = () => {
    allRemoveBtnEl = document.querySelectorAll(".remove-btn");
    allRemoveBtnEl.forEach(button => {
@@ -82,10 +99,8 @@ const findAllSelectEl = () => {
 }
 
 const updateOutput = () => {
-   console.log("updating!");
    let output = "";
    let nodes = document.querySelectorAll(".node");
-   console.log(nodes);
    for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
       let nodeOutput = "";
@@ -104,23 +119,6 @@ const updateOutput = () => {
    queryOutputTextEl.textContent = output;
    let outputURIEncoded = encodeURIComponent(output);
    googleSearchBtn.setAttribute("href","https://www.google.com/search?q=" + outputURIEncoded);
-}
-
-const addRows = () => {
-   let lastChild = inputContainerEl.lastElementChild;
-
-   const inputRowsEl = getNewInputRowsEl();
-   inputContainerEl.insertBefore(inputRowsEl, lastChild);
-
-   findAllRemoveBtnEl();
-   findAllInputEl();
-   findAllSelectEl();
-}
-
-const removeRow = (event) => {
-   const row = event.target.parentNode;
-   row.remove();
-   updateOutput();
 }
 
 const copyOutput = () => {
